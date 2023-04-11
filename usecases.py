@@ -3,7 +3,7 @@ from typing import List, Optional
 from gremlin_python.process.graph_traversal import __
 
 from database import GraphDB
-from models import PersonCreate, BookCreate, PersonUpdate, RatingCreate, Person, Book, Rating
+from models import BookUpdate, PersonCreate, BookCreate, PersonUpdate, RatingCreate, Person, Book, Rating
 
 
 db = GraphDB()
