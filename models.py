@@ -16,7 +16,7 @@ class PersonUpdate(PersonBase):
 
 
 class Person(PersonBase):
-    id: int
+    id: str
 
     class Config:
         orm_mode = True
@@ -29,7 +29,7 @@ class BookBase(BaseModel):
 
 
 class BookCreate(BookBase):
-    authors: List[int]
+    authors: List[str]
 
 
 class BookUpdate(BookBase):
@@ -37,7 +37,7 @@ class BookUpdate(BookBase):
 
 
 class Book(BookBase):
-    id: int
+    id: str
     authors: List[Person]
     average_rating: Optional[float]
     ratings_count: int
@@ -47,8 +47,8 @@ class Book(BookBase):
 
 
 class RatingCreate(BaseModel):
-    book_id: int
-    reader_id: int
+    book_id: str
+    reader_id: str
     score: int = Field(..., ge=1, le=5)
     comment: Optional[str] = Field(None, max_length=256)
 
