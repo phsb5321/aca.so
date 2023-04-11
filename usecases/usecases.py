@@ -1,17 +1,31 @@
 # usecases.py
 from typing import List, Optional
-from gremlin_python.process.graph_traversal import __
-
 from database import GraphDB
-from models import PersonCreate, BookCreate, PersonUpdate, RatingCreate, Person, Book, Rating
+from models import BookUpdate, PersonCreate, BookCreate, PersonUpdate, RatingCreate, Person, Book, Rating
+import uuid
 
 
-db = GraphDB()
-g = db.get_traversal()
+async def create_person(db: GraphDB, person: PersonCreate) -> Person:
+    person_properties = person.dict()
+    person_id = str(uuid.uuid4())
+    person_properties["id"] = person_id
+    # Use the async_create_vertex function
+    new_vertex = await db.create_vertex("person", person_properties)
 
+    # Get the properties of the created vertex using the vertex traversal
+    g = await db.get_traversal()
+    response_dict = await g.V(new_vertex.id).valueMap().next()
 
-def create_person(person: PersonCreate) -> Person:
-    pass  # Implement create person logic
+    if 'id' in response_dict:
+        response_dict["id"] = response_dict["id"][0]
+    if 'name' in response_dict:
+        response_dict["name"] = response_dict["name"][0]
+
+    response = Person(**response_dict)
+
+    # Close the connection
+    await db.close_connection()
+    return response
 
 
 def update_person(person_id: int, person: PersonUpdate) -> Person:
