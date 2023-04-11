@@ -1,0 +1,8 @@
+version: '3.1'
+
+services:
+  graph-db:
+    container_name: graph-db
+    image: acasohub/gremlin-server:latest
+    ports:
+      - "8182:8182"
