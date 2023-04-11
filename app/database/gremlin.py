@@ -1,5 +1,4 @@
 # database.py
-
 import asyncio
 from aiogremlin import DriverRemoteConnection, Graph
 from gremlin_python.process.traversal import T
