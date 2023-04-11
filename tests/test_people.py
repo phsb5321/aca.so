@@ -1,19 +1,20 @@
+# test_usecases.py
 import pytest
-from database import GraphDB
+from app.database.gremlin import GraphDB
 import asyncio
-
-import usecases.usecases as usecase
-from models import PersonCreate
+from app.database.models import PersonCreate
+from app.services.people_services import PersonUseCases
 
 
 @pytest.mark.asyncio
 async def test_create_person():
     # Create a new instance of GraphDB and connect to a real database
-    db = GraphDB()
+    graph_database = GraphDB()
+    people_repository = PersonUseCases(graph_database)
 
     try:
         # Call the create_person function
-        created_person = await usecase.create_person(db, PersonCreate(name="John Doe"))
+        created_person = await people_repository.create_person(PersonCreate(name="John Doe"))
 
         # Assert that the returned Person object has the correct id
         assert isinstance(created_person.id, str)
@@ -23,4 +24,4 @@ async def test_create_person():
 
     finally:
         # Close the connection
-        await db.close_connection()
+        await graph_database.close_connection()
