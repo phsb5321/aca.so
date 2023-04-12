@@ -1,8 +1,9 @@
-from fastapi import APIRouter, HTTPException
-from typing import List, Optional
-from app.database.models import Book, BookUpdate, BookCreate, Person, Rating, RatingCreate
-from fastapi import APIRouter, Depends, HTTPException
+# books_routes.py
 from app.services.books_services import BookUseCases
+from fastapi import APIRouter, Depends, HTTPException
+from app.database.models import Book, BookUpdate, BookCreate, Person, Rating, RatingCreate
+from typing import List, Optional
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
