@@ -14,7 +14,7 @@ from app.services import (
 router = APIRouter()
 
 
-@router.post("/", response_model=Person)
+@router.post("", response_model=Person)
 async def create_person(person: PersonCreate):
     graph_database = GraphDB()
     people_repository = CreatePersonService(graph_database)
@@ -42,7 +42,7 @@ async def delete_person(person_id: str):
     return {"deleted": True}
 
 
-@router.get("/", response_model=List[Person])
+@router.get("", response_model=List[Person])
 async def list_people(skip: int = 0, limit: int = 100):
     graph_database = GraphDB()
     people_repository = ListPeopleService(graph_database)
