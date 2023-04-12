@@ -1,3 +1,4 @@
+# people_routes.py
 from fastapi import APIRouter, HTTPException
 from typing import List, Optional
 from app.database.gremlin import GraphDB
@@ -16,7 +17,7 @@ async def create_person(person: PersonCreate):
 
 
 @router.get("/{person_id}", response_model=Person)
-async def read_person(person_id: int):
+async def read_person(person_id: str):
     graph_database = GraphDB()
     people_repository = PersonUseCases(graph_database)
     person = await people_repository.get_person(person_id)
@@ -26,7 +27,7 @@ async def read_person(person_id: int):
 
 
 @router.put("/{person_id}", response_model=Person)
-async def update_person(person_id: int, person: PersonUpdate):
+async def update_person(person_id: str, person: PersonUpdate):
     graph_database = GraphDB()
     people_repository = PersonUseCases(graph_database)
     updated_person = await people_repository.update_person(person_id, person)
@@ -36,7 +37,7 @@ async def update_person(person_id: int, person: PersonUpdate):
 
 
 @router.delete("/{person_id}")
-async def delete_person(person_id: int):
+async def delete_person(person_id: str):
     graph_database = GraphDB()
     people_repository = PersonUseCases(graph_database)
     result = await people_repository.delete_person(person_id)
