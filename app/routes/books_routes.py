@@ -16,7 +16,7 @@ from app.services import (
     CreateReadService,
     UpdateBookService,
     DeleteBookService,
-    GetBookService,
+    GetBookByIdService,
     ListBooksService,
     ListBooksByAuthorService,
     ListReadersByBookService,
@@ -31,16 +31,18 @@ router = APIRouter()
 
 @router.post("/books/", response_model=Book)
 async def create_book_route(book: BookCreate) -> Book:
-    book_repository = CreateBookService()
-    people_repository = GetPersonService()
+    create_book = CreateBookService()
+    get_person_by_id = GetPersonService()
 
     # For each author id, confirm the person exists in the database
+    validated_authors = []
     for author_id in book.authors:
-        author = await people_repository.execute(author_id)
+        author = await get_person_by_id.execute(author_id)
         if not author:
             raise HTTPException(status_code=404, detail="Author not found")
+        validated_authors.append(author.id)
 
-    response = await book_repository.execute(book)
+    response = await create_book.execute(book, validated_authors)
     return response
 
 
@@ -71,7 +73,7 @@ async def delete_book_route(book_id: int) -> None:
 
 @router.get("/books/{book_id}", response_model=Book)
 async def get_book_by_id_route(book_id: int) -> Book:
-    book_repository = GetBookService()
+    book_repository = GetBookByIdService()
     db_book = await book_repository.execute(book_id)
     if not db_book:
         raise HTTPException(status_code=404, detail="Book not found")

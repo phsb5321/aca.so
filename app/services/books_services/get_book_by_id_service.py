@@ -6,7 +6,7 @@ from app.database.gremlin import GraphDB
 from app.database.models import AuthorshipCreate, BookUpdate, PersonCreate, BookCreate, PersonUpdate, RatingCreate, Person, Book, Rating, ReadCreate
 
 
-class GetBookService:
+class GetBookByIdService:
     def __init__(self, db: GraphDB):
         self.db = db
 

@@ -29,7 +29,7 @@ class BookBase(BaseModel):
 
 
 class BookCreate(BookBase):
-    author_ids: List[str]
+    author_ids: Optional[List[str]] = None
 
 
 class BookUpdate(BookBase):

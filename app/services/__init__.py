@@ -7,7 +7,7 @@ from .authors_services.list_books_by_author_service import ListBooksByAuthorServ
 # Books
 from .books_services.create_book_service import CreateBookService
 from .books_services.delete_book_service import DeleteBookService
-from .books_services.get_book_service import GetBookService
+from .books_services.get_book_by_id_service import GetBookByIdService
 from .books_services.list_books_service import ListBooksService
 from .books_services.update_book_service import UpdateBookService
 
@@ -29,7 +29,7 @@ __all__ = [
     "ListBooksByAuthorService",
     "CreateBookService",
     "DeleteBookService",
-    "GetBookService",
+    "GetBookByIdService",
     "ListBooksService",
     "UpdateBookService",
     "CreatePersonService",
