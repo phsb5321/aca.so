@@ -49,17 +49,17 @@ class GraphDB:
         await self.close_connection()
         return result[0]
 
-    async def create_relationship(self, from_id: str, to_id: str, relationship_label: str) -> None:
+    async def create_edge(self, edge_label: str, from_vertex_id: str, to_vertex_id: str) -> None:
         """
-        Create a relationship between two vertices using the specified relationship label.
+        Create an edge between two vertices with the specified edge label.
 
-        :param from_id: ID of the vertex from which the relationship starts
-        :param to_id: ID of the vertex to which the relationship points
-        :param relationship_label: Label for the relationship
+        :param edge_label: Label for the edge
+        :param from_vertex_id: ID of the vertex from which the edge starts
+        :param to_vertex_id: ID of the vertex to which the edge points
         """
         g = await self.get_traversal()
 
-        # Create the relationship between the vertices with the specified label
-        await g.V(from_id).addE(relationship_label).to(g.V(to_id)).toList()
+        # Create the edge between the vertices with the specified label
+        await g.V(from_vertex_id).addE(edge_label).to(g.V(to_vertex_id)).toList()
 
         await self.close_connection()
