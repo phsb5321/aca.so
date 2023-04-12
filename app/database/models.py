@@ -38,7 +38,7 @@ class BookUpdate(BookBase):
 
 class Book(BookBase):
     id: str
-    authors: List[Person]
+    authors: Optional[List[Person]]
     average_rating: Optional[float]
     ratings_count: Optional[int]
 
