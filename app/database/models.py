@@ -1,4 +1,3 @@
-# models.py
 from typing import List, Optional
 from pydantic import BaseModel, Field
 
@@ -46,15 +45,42 @@ class Book(BookBase):
         orm_mode = True
 
 
-class RatingCreate(BaseModel):
+class AuthorshipCreate(BaseModel):
+    author_id: str
     book_id: str
+
+
+class Authorship(BaseModel):
+    author: Person
+    book: Book
+
+    class Config:
+        orm_mode = True
+
+
+class ReadCreate(BaseModel):
     reader_id: str
+    book_id: str
+
+
+class Read(BaseModel):
+    reader: Person
+    book: Book
+
+    class Config:
+        orm_mode = True
+
+
+class RatingCreate(BaseModel):
+    reader_id: str
+    book_id: str
     score: int = Field(..., ge=1, le=5)
     comment: Optional[str] = Field(None, max_length=256)
 
 
 class Rating(BaseModel):
     reader: Person
+    book: Book
     score: int
     comment: Optional[str]
 
