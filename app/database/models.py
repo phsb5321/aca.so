@@ -1,3 +1,4 @@
+# app/database/models.py
 from typing import List, Optional
 from pydantic import BaseModel, Field
 
@@ -28,7 +29,7 @@ class BookBase(BaseModel):
 
 
 class BookCreate(BookBase):
-    authors: List[str]
+    author_ids: List[str]
 
 
 class BookUpdate(BookBase):
