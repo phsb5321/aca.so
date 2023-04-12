@@ -10,7 +10,7 @@ class DeleteBookService:
     def __init__(self, db: GraphDB):
         self.db = db
 
-    async def execute(self, book_id: str) -> None:
+    async def execute(self, book_id: str) -> str:  # Update the return type to str
         # Get a graph traversal object
         g = await self.db.get_traversal()
 
@@ -27,3 +27,5 @@ class DeleteBookService:
 
         # Close the graph database connection
         await self.db.close_connection()
+
+        return book_id  # Return the book_id

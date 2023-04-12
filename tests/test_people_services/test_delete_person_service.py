@@ -8,7 +8,7 @@ from app.services import (
     UpdatePersonService,
     DeletePersonService,
     ListPeopleService,
-    GetPersonService
+    GetPersonByIdService
 )
 
 
