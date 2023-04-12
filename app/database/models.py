@@ -40,7 +40,7 @@ class Book(BookBase):
     id: str
     authors: List[Person]
     average_rating: Optional[float]
-    ratings_count: int
+    ratings_count: Optional[int]
 
     class Config:
         orm_mode = True
