@@ -5,7 +5,7 @@ from app.database.gremlin import GraphDB
 from app.database.models import PersonCreate
 from app.services import (
     CreatePersonService,
-    GetPersonService
+    GetPersonByIdService
 )
 
 
@@ -13,7 +13,7 @@ from app.services import (
 @asynccontextmanager
 async def generate_services():
     graph_database = GraphDB()
-    get_person_by_id = GetPersonService(graph_database)
+    get_person_by_id = GetPersonByIdService(graph_database)
     create_person = CreatePersonService(graph_database)
     try:
         yield (get_person_by_id, create_person)

@@ -8,7 +8,7 @@ from app.services import (
     UpdatePersonService,
     DeletePersonService,
     ListPeopleService,
-    GetPersonService
+    GetPersonByIdService
 )
 
 router = APIRouter()
@@ -53,7 +53,7 @@ async def list_people(skip: int = 0, limit: int = 100):
 @router.get("/{person_id}", response_model=Person)
 async def get_person_by_id(person_id: str):
     graph_database = GraphDB()
-    people_repository = GetPersonService(graph_database)
+    people_repository = GetPersonByIdService(graph_database)
     person = await people_repository.execute(person_id)
     if not person:
         raise HTTPException(status_code=404, detail="Person not found")

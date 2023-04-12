@@ -9,7 +9,7 @@ from gremlin_python.process.traversal import T
 from app.database.models import PersonCreate, PersonUpdate, Person
 
 
-class GetPersonService:
+class GetPersonByIdService:
     def __init__(self, db: GraphDB):
         self.db = db
 

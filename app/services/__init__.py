@@ -14,7 +14,7 @@ from .books_services.update_book_service import UpdateBookService
 # People
 from .people_services.create_person_service import CreatePersonService
 from .people_services.delete_person_service import DeletePersonService
-from .people_services.get_person_service import GetPersonService
+from .people_services.get_person_by_id_service import GetPersonByIdService
 from .people_services.list_people_service import ListPeopleService
 from .people_services.update_person_service import UpdatePersonService
 
@@ -34,7 +34,7 @@ __all__ = [
     "UpdateBookService",
     "CreatePersonService",
     "DeletePersonService",
-    "GetPersonService",
+    "GetPersonByIdService",
     "ListPeopleService",
     "UpdatePersonService",
     "CreateRatingService",
