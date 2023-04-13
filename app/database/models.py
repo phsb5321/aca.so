@@ -39,8 +39,8 @@ class BookUpdate(BookBase):
 class Book(BookBase):
     id: str
     authors: Optional[List[Person]]
-    average_rating: Optional[float]
-    ratings_count: Optional[int]
+    average_rating: Optional[float] = 0.0
+    rating_count: Optional[int] = 0
 
     class Config:
         orm_mode = True

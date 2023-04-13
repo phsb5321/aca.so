@@ -29,8 +29,18 @@ class CreateRatingService:
             raise HTTPException(
                 status_code=404, detail="Reader or book not found")
 
-        # Create a new edge labeled "rated" between the reader vertex and the book vertex with the given rating properties
+        # Update the book's rating count and average rating
+        new_rating_count = book_data.rating_count + 1
+        new_average_rating = (
+            (book_data.average_rating * book_data.rating_count) + rating.score) / new_rating_count
+        book_data.rating_count = new_rating_count
+        book_data.average_rating = new_average_rating
+
+        # Update the book vertex in the graph database
         g = await self.db.get_traversal()
+        await g.V(book_data.id).property("rating_count", new_rating_count).property("average_rating", new_average_rating).next()
+
+        # Create a new edge labeled "rated" between the reader vertex and the book vertex with the given rating properties
         edge_properties = {"score": rating.score, "comment": rating.comment}
         rated_edge = await g.V(rating.reader_id).addE("rated").to(g.V(rating.book_id)).property("score",
                                                                                                 edge_properties[
