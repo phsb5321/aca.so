@@ -40,11 +40,8 @@ async def create_book_route(book: BookCreate) -> Book:
 @router.put("/{book_id}", response_model=Book)
 async def update_book_route(book_id: str, book: BookUpdate) -> Book:
     graph_database = GraphDB()
-    book_repository = UpdateBookService(graph_database)
-    db_book = await book_repository.execute(book_id)
-    if not db_book:
-        raise HTTPException(status_code=404, detail="Book not found")
-    response = await book_repository.execute(book_id, book)
+    update_book = UpdateBookService(graph_database)
+    response = await update_book.execute(book_id, book)
     return response
 
 

@@ -7,9 +7,9 @@ from app.services.people_services.get_person_by_id_service import GetPersonByIdS
 
 
 class ListReadersByBookService:
-    def __init__(self, db: GraphDB, getPersonByIdService: GetPersonByIdService):
+    def __init__(self, db: GraphDB, get_person_by_id_service: GetPersonByIdService):
         self.db = db
-        self.get_person_by_id = getPersonByIdService
+        self.get_person_by_id = get_person_by_id_service
 
     async def execute(self, book_id: int, skip: int = 0, limit: int = 10) -> List[Person]:
         g = await self.db.get_traversal()
