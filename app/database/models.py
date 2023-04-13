@@ -1,5 +1,5 @@
 # app/database/models.py
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 
 
@@ -73,8 +73,8 @@ class Read(BaseModel):
 
 
 class RatingCreate(BaseModel):
-    reader_id: str
-    book_id: str
+    reader_id: Union[str, Person]
+    book_id: Union[str, Book]
     score: int = Field(..., ge=1, le=5)
     comment: Optional[str] = Field(None, max_length=256)
 
